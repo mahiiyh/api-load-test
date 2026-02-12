@@ -1,0 +1,53 @@
+{
+    "name": "api-load-test",
+    "version": "1.0.0",
+    "description": "Professional k6 load testing framework for any REST API with comprehensive test scenarios and performance metrics",
+    "main": "index.js",
+    "scripts": {
+        "test:smoke": "k6 run -e ENVIRONMENT=dev tests/smoke/api-smoke.js",
+        "test:load": "k6 run -e ENVIRONMENT=dev tests/load/api-load.js",
+        "test:stress": "k6 run -e ENVIRONMENT=dev tests/stress/api-stress.js",
+        "test:spike": "k6 run -e ENVIRONMENT=dev tests/spike/api-spike.js",
+        "test:soak": "k6 run -e ENVIRONMENT=dev tests/soak/api-soak.js",
+        "test:all": "npm run test:smoke && npm run test:load && npm run test:stress",
+        "test:attendance-validate": "k6 run -e ENVIRONMENT=dev tests/validation/business-rules-validation.js --vus 1 --iterations 1",
+        "test:attendance-smoke": "k6 run -e ENVIRONMENT=dev tests/smoke/attendance-sample-smoke.js",
+        "test:attendance-load": "k6 run -e ENVIRONMENT=dev tests/load/attendance-sample-load.js",
+        "test:attendance-stress": "k6 run -e ENVIRONMENT=dev tests/stress/attendance-bulk-upload-stress.js",
+        "test:attendance-all": "npm run test:attendance-validate && npm run test:attendance-smoke && npm run test:attendance-load && npm run test:attendance-stress",
+        "generate:sample-data": "node scripts/generate-sample-data.js",
+        "report": "k6 run --out json=reports/test-results.json"
+    },
+    "keywords": [
+        "k6",
+        "load-testing",
+        "performance-testing",
+        "api-testing",
+        "stress-testing",
+        "smoke-testing",
+        "spike-testing",
+        "soak-testing",
+        "rest-api",
+        "testing-framework",
+        "performance",
+        "benchmarking"
+    ],
+    "author": "Mahima Sandaken <mahiiyh>",
+    "contributors": [
+        "Vishwa0527",
+        "kavishkadinajara"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mahiiyh/api-load-test.git"
+    },
+    "bugs": {
+        "url": "https://github.com/mahiiyh/api-load-test/issues"
+    },
+    "homepage": "https://github.com/mahiiyh/api-load-test#readme",
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "devDependencies": {}
+}
