@@ -39,7 +39,7 @@ export default function TestPage() {
     // For demo, show mock results
     // In production, this would call an API to run k6 tests
     const testId = Date.now().toString();
-    router.push(`/results/${testId}?demo=true`);
+    router.push(`/results?id=${testId}&demo=true`);
   };
 
   return (

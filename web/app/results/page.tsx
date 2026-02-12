@@ -1,17 +1,11 @@
 'use client';
 
-import { useParams, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// Required for static export with dynamic routes
-export function generateStaticParams() {
-  // Generate a demo page for static export
-  return [{ id: 'demo' }];
-}
-
 export default function ResultsPage() {
-  const params = useParams();
   const searchParams = useSearchParams();
+  const testId = searchParams.get('id') || 'demo';
   const isDemo = searchParams.get('demo') === 'true';
 
   // Mock data for demonstration
@@ -92,7 +86,7 @@ export default function ResultsPage() {
                 Load Test Results
               </h1>
               <p className="text-slate-600 dark:text-slate-300">
-                Test ID: {params.id} {isDemo && <span className="text-yellow-600 dark:text-yellow-400">(Demo Data)</span>}
+                Test ID: {testId} {isDemo && <span className="text-yellow-600 dark:text-yellow-400">(Demo Data)</span>}
               </p>
             </div>
             <div className={`px-6 py-3 rounded-xl font-semibold ${
