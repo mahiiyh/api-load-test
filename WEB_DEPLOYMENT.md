@@ -32,9 +32,12 @@ git push origin main
    Build command: cd web && npm install && npm run build
    Build output directory: web/out
    Root directory: /
+   Deploy command: (leave EMPTY - Cloudflare auto-deploys static files)
    ```
 5. **Environment Variables**: (none required yet)
 6. **Deploy**!
+
+**⚠️ IMPORTANT**: Make sure "Deploy command" is EMPTY. Cloudflare Pages automatically deploys the static files from `web/out`. Do NOT set a custom deploy command.
 
 ### 3. Configure Custom Domain
 
