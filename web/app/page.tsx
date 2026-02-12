@@ -43,10 +43,10 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="#features"
+              href="/test"
               className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              Get Started
+              🚀 Start Testing Now
             </a>
             <a
               href="https://github.com/mahiiyh/api-load-test"
@@ -131,14 +131,22 @@ export default function Home() {
           <p className="text-blue-100 mb-8 text-lg max-w-2xl mx-auto">
             Clone the repository, configure your API endpoints, and start load testing in minutes.
           </p>
-          <a
-            href="https://github.com/mahiiyh/api-load-test"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Get Started on GitHub →
-          </a>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <a
+              href="/test"
+              className="inline-block px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Try Demo Now →
+            </a>
+            <a
+              href="https://github.com/mahiiyh/api-load-test"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-4 bg-blue-600 text-white border-2 border-white rounded-xl font-semibold hover:bg-blue-700 transition-all"
+            >
+              Get Started on GitHub
+            </a>
+          </div>
         </div>
       </main>
 
