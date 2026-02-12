@@ -3,6 +3,12 @@
 import { useParams, useSearchParams } from 'next/navigation';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+// Required for static export with dynamic routes
+export function generateStaticParams() {
+  // Generate a demo page for static export
+  return [{ id: 'demo' }];
+}
+
 export default function ResultsPage() {
   const params = useParams();
   const searchParams = useSearchParams();
