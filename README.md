@@ -9,13 +9,17 @@ A professional, production-ready **k6 load testing framework** for testing any R
 
 ## 🌐 Web Interface
 
-**Test any API with a beautiful web interface** at [loadtest.mahiiyh.me](https://loadtest.mahiiyh.me) (coming soon)
+**Test any API with a beautiful web interface** at [loadtest.mahiiyh.me](https://loadtest.mahiiyh.me)
 
 The web app provides:
-- 🎨 User-friendly interface for configuring API tests
-- 📊 Real-time visualization of test results
-- 📈 Interactive charts and performance metrics
-- 🚀 No installation required - test any API from your browser
+- 🎨 **User-friendly interface** for configuring API tests without CLI
+- 📊 **Real-time visualization** of test results with interactive charts
+- 📈 **Performance metrics** - response times, throughput, status codes
+- 🧪 **Multiple test scenarios** - Smoke, Load, Stress, Spike, Soak tests
+- 🔧 **Full HTTP support** - All methods, custom headers, request bodies
+- 🚀 **No installation required** - Test APIs directly from your browser
+
+Try the **demo mode** to see how it works, or connect a backend to run actual k6 tests.
 
 See [web/](web/) for local development or [WEB_DEPLOYMENT.md](WEB_DEPLOYMENT.md) for deployment instructions.
 
