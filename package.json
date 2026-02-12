@@ -1,7 +1,7 @@
 {
     "name": "api-load-test",
     "version": "1.0.0",
-    "description": "Professional k6 load testing framework for any REST API with comprehensive test scenarios and performance metrics",
+    "description": "Professional k6 load testing framework for testing ANY REST API. Includes reusable templates, utilities, and a complete working example with real performance analysis.",
     "main": "index.js",
     "scripts": {
         "test:smoke": "k6 run -e ENVIRONMENT=dev tests/smoke/api-smoke.js",
@@ -10,13 +10,13 @@
         "test:spike": "k6 run -e ENVIRONMENT=dev tests/spike/api-spike.js",
         "test:soak": "k6 run -e ENVIRONMENT=dev tests/soak/api-soak.js",
         "test:all": "npm run test:smoke && npm run test:load && npm run test:stress",
-        "test:attendance-validate": "k6 run -e ENVIRONMENT=dev tests/validation/business-rules-validation.js --vus 1 --iterations 1",
-        "test:attendance-smoke": "k6 run -e ENVIRONMENT=dev tests/smoke/attendance-sample-smoke.js",
-        "test:attendance-load": "k6 run -e ENVIRONMENT=dev tests/load/attendance-sample-load.js",
-        "test:attendance-stress": "k6 run -e ENVIRONMENT=dev tests/stress/attendance-bulk-upload-stress.js",
-        "test:attendance-all": "npm run test:attendance-validate && npm run test:attendance-smoke && npm run test:attendance-load && npm run test:attendance-stress",
+        "example:attendance-smoke": "k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-smoke.js",
+        "example:attendance-load": "k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-load.js",
+        "example:attendance-stress": "k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-stress.js",
+        "example:attendance-all": "npm run example:attendance-smoke && npm run example:attendance-load && npm run example:attendance-stress",
         "generate:sample-data": "node scripts/generate-sample-data.js",
-        "report": "k6 run --out json=reports/test-results.json"
+        "report": "k6 run --out json=reports/test-results.json",
+        "help": "echo 'Available commands:\n  npm run test:smoke          - Run generic smoke test\n  npm run test:load           - Run generic load test\n  npm run example:*           - Run attendance API examples\n  See README.md for full documentation'"
     },
     "keywords": [
         "k6",
@@ -30,7 +30,10 @@
         "rest-api",
         "testing-framework",
         "performance",
-        "benchmarking"
+        "benchmarking",
+        "generic-framework",
+        "templates",
+        "any-api"
     ],
     "author": "Mahima Sandaken <mahiiyh>",
     "contributors": [

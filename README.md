@@ -17,6 +17,31 @@ A professional, production-ready **k6 load testing framework** for testing any R
 - **📈 Performance Reports**: Built-in threshold validation and suggestions
 - **🎨 Clean Code**: Modular structure with reusable utilities
 
+## 🎯 Framework vs Examples
+
+This repository contains **TWO key components**:
+
+### 1. **Generic Framework** (Reusable for Any API)
+The core framework is **fully generic** and can test any REST API:
+- `config/` - Environment and threshold configuration
+- `utils/` - Authentication, validation, and helper functions
+- `templates/` - Clean templates to copy and customize
+- `tests/` - Generic test structure for all scenarios
+
+### 2. **Working Example** (Attendance Bulk Upload API)
+A complete real-world implementation showing the framework in action:
+- `examples/attendance-api/` - Full implementation testing an attendance API
+- Demonstrates authentication, data transformation, and bulk operations
+- Includes real performance analysis and optimization recommendations
+
+**You can use this framework for ANY API by:**
+1. Copying templates from `templates/`
+2. Updating `config/env.js` with your API details
+3. Customizing test files for your endpoints
+4. Running tests just like the attendance example
+
+**See the [Templates Guide](templates/README.md) and [Getting Started](GETTING_STARTED.md) for step-by-step instructions.**
+
 ## 📋 Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -69,37 +94,65 @@ npm install
 
 ## 🚀 Quick Start
 
-### 1. Configure Your API
+### Option 1: Use Generic Tests (5 minutes)
 
-Edit `config/env.js` to set your API endpoints and credentials:
+1. **Configure your API** - Edit `config/env.js`:
+   ```javascript
+   export const environments = {
+     dev: {
+       baseURL: 'http://localhost:5000',  // Your API URL
+       testUsers: {
+         admin: {
+           username: 'admin',
+           password: 'yourpassword'
+         }
+       }
+     }
+   };
+   ```
 
-```javascript
-export const environments = {
-  dev: {
-    baseURL: 'http://localhost:5000',  // Your API URL
-    testUsers: {
-      admin: {
-        username: 'admin',
-        password: 'yourpassword'
-      }
-    }
-  }
-};
-```
+2. **Run a generic test:**
+   ```bash
+   k6 run -e ENVIRONMENT=dev tests/smoke/api-smoke.js
+   ```
 
-### 2. Run Your First Test
+### Option 2: Create Custom Tests from Templates (15 minutes)
+
+1. **Copy a template:**
+   ```bash
+   cp templates/smoke.template.js tests/smoke/my-api-smoke.js
+   ```
+
+2. **Update the template** with your endpoints:
+   - Find all `← UPDATE:` comments
+   - Replace with your API URLs and payloads
+
+3. **Run your custom test:**
+   ```bash
+   k6 run -e ENVIRONMENT=dev tests/smoke/my-api-smoke.js
+   ```
+
+**See [templates/README.md](templates/README.md) for detailed customization guide.**
+
+### Option 3: Learn from Working Example (30 minutes)
+
+Explore the complete attendance API example:
 
 ```bash
-# Quick smoke test (validates API is working)
-k6 run -e ENVIRONMENT=dev tests/smoke/api-smoke.js
+# Study the example structure
+cd examples/attendance-api/
 
-# Or use npm scripts
-npm run test:smoke
+# Run the example tests
+k6 run -e ENVIRONMENT=dev tests/attendance-bulk-upload-smoke.js
 ```
 
-### 3. View Results
+**See [examples/attendance-api/README.md](examples/attendance-api/README.md) for walkthrough.**
 
-After the test completes, you'll see:
+---
+
+### After Running Tests
+
+You'll see comprehensive results:
 - ✅ **Pass/Fail Metrics** - Which thresholds passed
 - 📊 **Performance Stats** - Response times, throughput
 - 🎯 **Recommendations** - What to optimize
@@ -324,62 +377,125 @@ Response times vary wildly: avg=2s, max=45s
 
 ```
 api-load-test/
-├── config/
-│   ├── env.js                    # Environment configurations
-│   └── thresholds.js             # Performance thresholds
-├── tests/
-│   ├── smoke/                    # Quick validation tests
-│   │   ├── api-smoke.js
-│   │   ├── lankem-erp-smoke.js
-│   │   └── attendance-sample-smoke.js
-│   ├── load/                     # Standard load tests
-│   │   ├── api-load.js
-│   │   ├── lankem-erp-load.js
-│   │   └── attendance-sample-load.js
-│   ├── stress/                   # Stress/capacity tests
-│   │   ├── api-stress.js
-│   │   └── attendance-bulk-upload-stress.js
-│   ├── spike/                    # Spike tests
-│   │   └── api-spike.js
-│   ├── soak/                     # Long-duration tests
-│   │   └── api-soak.js
-│   └── validation/               # Business logic validation
+├── 📂 config/                    # ⚙️  FRAMEWORK: Configuration
+│   ├── env.js                    #    Environment configs (dev/staging/prod)
+│   └── thresholds.js             #    Performance thresholds
+│
+├── 📂 utils/                     # 🔧 FRAMEWORK: Utilities
+│   ├── auth.js                   #    Authentication helpers
+│   └── helpers.js                #    Common utilities
+│
+├── 📂 templates/                 # 📋 FRAMEWORK: Test Templates
+│   ├── README.md                 #    How to use templates
+│   ├── smoke.template.js         #    Smoke test template
+│   ├── load.template.js          #    Load test template
+│   └── stress.template.js        #    Stress test template
+│
+├── 📂 tests/                     # 🧪 FRAMEWORK: Generic Tests
+│   ├── smoke/                    #    Quick validation tests
+│   │   ├── api-smoke.js          #    Generic API smoke test
+│   │   └── lankem-erp-smoke.js   #    Custom API smoke test
+│   ├── load/                     #    Standard load tests
+│   │   ├── api-load.js           #    Generic load test
+│   │   └── lankem-erp-load.js    #    Custom load test
+│   ├── stress/                   #    Stress/capacity tests
+│   │   └── api-stress.js         #    Generic stress test
+│   ├── spike/                    #    Spike tests
+│   │   └── api-spike.js          #    Generic spike test
+│   ├── soak/                     #    Long-duration tests
+│   │   └── api-soak.js           #    Generic soak test
+│   └── validation/               #    Business logic validation
 │       └── business-rules-validation.js
-├── utils/
-│   ├── auth.js                   # Authentication helpers
-│   ├── helpers.js                # Common utilities
-│   └── attendance-helpers.js     # Domain-specific helpers
-├── sample-data/                  # Test datasets
-│   ├── attendance-sample-10.json
-│   ├── attendance-sample-50.json
-│   └── attendance-sample-100.json
-├── scripts/
-│   └── generate-sample-data.js   # Data generation scripts
-├── reports/                      # Test results (gitignored)
-├── .gitignore
-├── .env.example                  # Environment template
-├── package.json
-├── LICENSE
-└── README.md
+│
+├── 📂 examples/                  # 📚 EXAMPLES: Working Implementations
+│   └── attendance-api/           #    Complete attendance API example
+│       ├── README.md             #    Example documentation
+│       ├── tests/                #    Example test files
+│       │   ├── attendance-bulk-upload-smoke.js
+│       │   ├── attendance-bulk-upload-load.js
+│       │   └── attendance-bulk-upload-stress.js
+│       ├── utils/                #    Example helpers
+│       │   └── attendance-helpers.js
+│       └── sample-data/          #    Example test data
+│           ├── attendance-sample-10.json
+│           ├── attendance-sample-50.json
+│           ├── attendance-sample-100.json
+│           └── README.md
+│
+├── 📂 scripts/                   # 🛠️  TOOLS: Utilities
+│   └── generate-sample-data.js   #    Data generation helper
+│
+├── 📂 reports/                   # 📊 OUTPUT: Test results (gitignored)
+│
+├── 📄 .gitignore
+├── 📄 .env.example               #    Environment template
+├── 📄 package.json               #    NPM scripts and metadata
+├── 📄 LICENSE                    #    MIT License
+├── 📄 README.md                  #    This file
+├── 📄 GETTING_STARTED.md         #    Quick start guide
+├── 📄 RESULTS_ANALYSIS.md        #    Performance analysis (example)
+├── 📄 CONTRIBUTING.md            #    Contribution guidelines
+├── 📄 CHANGELOG.md               #    Version history
+└── 📄 CONTRIBUTORS.md            #    Team recognition
 ```
 
-## 🎯 Example Use Case: Bulk Upload API
+**Legend:**
+- **⚙️ FRAMEWORK**: Core reusable components for any API
+- **📋 TEMPLATES**: Copy these to create your own tests
+- **📚 EXAMPLES**: Real-world reference implementations
+- **🛠️ TOOLS**: Helper scripts and utilities
 
-This repository includes a complete example for testing bulk upload endpoints. Check out:
+## 🎯 Working Example: Attendance Bulk Upload API
 
-- **Tests**: `tests/load/attendance-sample-load.js`
-- **Sample Data**: `sample-data/attendance-sample-*.json`
-- **Results Analysis**: See "Performance Optimization" section
+The repository includes a **complete, production-tested example** demonstrating the framework with a real bulk upload API:
 
-Run the example:
+### What's Included
+
+- **Full test suite**: Smoke, Load, and Stress tests
+- **Real test data**: JSON files with 10, 50, and 100 records
+- **Custom helpers**: Domain-specific data transformation
+- **Performance analysis**: Real results with optimization recommendations
+
+### Location
+
+```
+examples/attendance-api/
+├── README.md                           # Example overview
+├── tests/                              # Test implementations
+├── utils/attendance-helpers.js         # Custom helpers
+└── sample-data/                        # Test datasets
+```
+
+### Key Learnings from This Example
+
+1. **Authentication patterns** - JWT tokens in non-standard response paths
+2. **Dynamic data** - Updating timestamps before upload
+3. **Performance issues** - 100 records taking 11.66s (documented with fixes)
+4. **Multiple payload sizes** - Testing with different data volumes
+5. **Real optimization** - 8 specific recommendations in [RESULTS_ANALYSIS.md](RESULTS_ANALYSIS.md)
+
+### How to Run the Example
 
 ```bash
-# Test bulk upload with different payload sizes
-npm run test:attendance-smoke
+# Quick smoke test (validates all payload sizes)
+k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-smoke.js
 
-# Full load test
-npm run test:attendance-load
+# Full load test (performance baseline)
+k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-load.js
+
+# Stress test (find breaking point)
+k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-stress.js
 ```
+
+### Adapting for Your API
+
+1. **Copy the structure**: `cp -r examples/attendance-api examples/my-api`
+2. **Update sample data**: Replace JSON files with your payload structure
+3. **Modify helpers**: Update transformation logic for your data
+4. **Adjust thresholds**: Set performance expectations for your API
+5. **Run tests**: Same commands, different endpoints
+
+**See [examples/attendance-api/README.md](examples/attendance-api/README.md) for detailed walkthrough.**
 
 ## 🤝 Contributing
 

@@ -1,4 +1,4 @@
-import { randomInt, randomString } from './helpers.js';
+import { randomInt, randomString } from '../../../utils/helpers.js';
 
 /**
  * Attendance Bulk Upload Data Generators for AgriGen ERP

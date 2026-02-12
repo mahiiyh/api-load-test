@@ -11,9 +11,9 @@
 
 import http from 'k6/http';
 import { check, group, sleep } from 'k6';
-import { config } from '../../config/env.js';
-import { log, parseJSON } from '../../utils/helpers.js';
-import { generateRealisticAttendance } from '../../utils/attendance-helpers.js';
+import { config } from '../../../config/env.js';
+import { log, parseJSON } from '../../../utils/helpers.js';
+import { generateRealisticAttendance } from '../utils/attendance-helpers.js';
 
 export const options = {
     vus: 1,

@@ -11,6 +11,30 @@ A step-by-step guide to get you up and running in 5 minutes.
 
 ---
 
+## 🎯 Choose Your Path
+
+This framework supports **any REST API**. Choose how you want to get started:
+
+### Path A: Start with Templates (Recommended for New Projects)
+- **Time**: 15 minutes
+- **Best for**: Creating tests for your specific API
+- **You'll get**: Clean templates to customize for your endpoints
+- **Start at**: [Step 1](#-step-1-install-k6)
+
+### Path B: Learn from Working Example (Recommended for Learning)
+- **Time**: 10 minutes
+- **Best for**: Understanding how the framework works
+- **You'll get**: Complete working example with real performance analysis
+- **Jump to**: [Working Example Guide](#-working-example-attendance-api)
+
+### Path C: Use Generic Tests (Quick Test)
+- **Time**: 5 minutes
+- **Best for**: Testing basic CRUD endpoints quickly
+- **You'll get**: Ready-to-run generic test suite
+- **Jump to**: [Step 3](#%EF%B8%8F-step-3-configure-for-your-api)
+
+---
+
 ## 🎯 Step 1: Install k6
 
 Choose your operating system:
@@ -209,7 +233,161 @@ export default function() {
 
 ---
 
-## 📈 Next Steps
+## � Using Templates to Create Custom Tests
+
+The framework provides clean templates that you can copy and customize for your specific API.
+
+### Available Templates
+
+| Template | Purpose | Complexity |
+|----------|---------|------------|
+| `smoke.template.js` | Quick validation | ⭐ Easy |
+| `load.template.js` | Performance baseline | ⭐⭐ Medium |
+| `stress.template.js` | Find breaking points | ⭐⭐⭐ Advanced |
+
+### Creating Your First Custom Test
+
+#### 1. Copy a Template
+
+```bash
+# Copy smoke test template
+cp templates/smoke.template.js tests/smoke/products-api-smoke.js
+```
+
+#### 2. Open and Find `← UPDATE:` Markers
+
+The template has clear markers showing what to customize:
+
+```javascript
+// BEFORE (template):
+const response = http.get(
+    `${baseUrl}/api/resources`,  // ← UPDATE: Your list endpoint
+    { headers }
+);
+
+// AFTER (your customization):
+const response = http.get(
+    `${baseUrl}/api/products`,   // Updated to your endpoint
+    { headers }
+);
+```
+
+#### 3. Update All Sections
+
+Search for all `← UPDATE:` comments and replace with:
+- Your actual API endpoints
+- Your request payloads
+- Your validation logic
+
+#### 4. Run Your Custom Test
+
+```bash
+k6 run -e ENVIRONMENT=dev tests/smoke/products-api-smoke.js
+```
+
+### Template Customization Guide
+
+Each template includes:
+- ✅ **Inline documentation** explaining each section
+- ✅ **Clear markers** (`← UPDATE:`) for customization points
+- ✅ **Example code** showing common patterns
+- ✅ **Best practices** for load testing
+
+**See [templates/README.md](templates/README.md) for comprehensive customization guide.**
+
+---
+
+## 📚 Working Example: Attendance API
+
+Learn by exploring a complete, production-tested example included in the repository.
+
+### What's in the Example
+
+The `examples/attendance-api/` folder contains:
+- ✅ **Full test suite** - Smoke, Load, and Stress tests
+- ✅ **Real test data** - JSON files with 10, 50, 100 records
+- ✅ **Custom helpers** - Data transformation logic
+- ✅ **Performance analysis** - Real results with 8 optimization recommendations
+- ✅ **Documentation** - How it was built and lessons learned
+
+### Explore the Example
+
+#### 1. Navigate to Example
+
+```bash
+cd examples/attendance-api/
+```
+
+#### 2. Read the Documentation
+
+```bash
+# Open the example README
+cat README.md
+```
+
+#### 3. Examine Test Structure
+
+```bash
+# View the smoke test
+cat tests/attendance-bulk-upload-smoke.js
+```
+
+Key things to notice:
+- How authentication is handled
+- How sample data files are loaded with `open()`
+- How data is transformed dynamically (dates updated)
+- How different payload sizes are tested
+- How thresholds differ by data volume
+
+#### 4. Run the Example Tests
+
+```bash
+# From project root
+k6 run -e ENVIRONMENT=dev examples/attendance-api/tests/attendance-bulk-upload-smoke.js
+```
+
+#### 5. Review Performance Analysis
+
+Open `RESULTS_ANALYSIS.md` to see:
+- Real performance metrics from actual tests
+- Problem identification (100 records = 11.66s)
+- 8 specific optimization recommendations
+- Before/after improvement targets
+
+### Adapting the Example for Your API
+
+**Step 1: Copy the structure**
+```bash
+cp -r examples/attendance-api examples/my-api
+cd examples/my-api
+```
+
+**Step 2: Replace sample data**
+- Update JSON files with your API's payload structure
+- Keep multiple file sizes for different test scenarios
+
+**Step 3: Update helpers**
+```bash
+# Edit utils/attendance-helpers.js (rename to your domain)
+# Replace data transformation logic with your needs
+```
+
+**Step 4: Modify tests**
+- Update endpoint URLs
+- Adjust payload structure
+- Change validation logic
+- Tweak performance thresholds
+
+**Step 5: Run your adapted tests**
+```bash
+k6 run -e ENVIRONMENT=dev examples/my-api/tests/my-api-smoke.js
+```
+
+**See [examples/attendance-api/README.md](examples/attendance-api/README.md) for detailed walkthrough.**
+
+---
+
+## �📈 Next Steps
 
 ### 1. Customize Performance Thresholds
 

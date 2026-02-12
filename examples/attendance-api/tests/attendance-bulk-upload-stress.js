@@ -12,17 +12,17 @@
 
 import http from 'k6/http';
 import { check, group, sleep } from 'k6';
-import { config } from '../../config/env.js';
+import { config } from '../../../config/env.js';
 import {
     checkResponse,
     parseJSON,
     randomInt,
     log
-} from '../../utils/helpers.js';
+} from '../../../utils/helpers.js';
 import {
     generateBulkAttendanceData,
     generateRealisticAttendance
-} from '../../utils/attendance-helpers.js';
+} from '../utils/attendance-helpers.js';
 
 export const options = {
     stages: [
