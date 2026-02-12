@@ -7,6 +7,18 @@ A professional, production-ready **k6 load testing framework** for testing any R
 [![GitHub stars](https://img.shields.io/github/stars/mahiiyh/api-load-test.svg)](https://github.com/mahiiyh/api-load-test/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/mahiiyh/api-load-test.svg)](https://github.com/mahiiyh/api-load-test/issues)
 
+## 🌐 Web Interface
+
+**Test any API with a beautiful web interface** at [loadtest.mahiiyh.me](https://loadtest.mahiiyh.me) (coming soon)
+
+The web app provides:
+- 🎨 User-friendly interface for configuring API tests
+- 📊 Real-time visualization of test results
+- 📈 Interactive charts and performance metrics
+- 🚀 No installation required - test any API from your browser
+
+See [web/](web/) for local development or [WEB_DEPLOYMENT.md](WEB_DEPLOYMENT.md) for deployment instructions.
+
 ## ✨ Features
 
 - **🎯 Multiple Test Scenarios**: Smoke, Load, Stress, Spike, and Soak tests
