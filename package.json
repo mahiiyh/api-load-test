@@ -1,6 +1,6 @@
 {
     "name": "api-load-test",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Professional k6 load testing framework for testing ANY REST API. Includes reusable templates, utilities, and a complete working example with real performance analysis.",
     "main": "index.js",
     "scripts": {
