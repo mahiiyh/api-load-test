@@ -1,9 +1,10 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-export default function ResultsPage() {
+function ResultsContent() {
   const searchParams = useSearchParams();
   const testId = searchParams.get('id') || 'demo';
   const isDemo = searchParams.get('demo') === 'true';
@@ -256,5 +257,22 @@ export default function ResultsPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span className="text-white font-bold text-3xl">⚡</span>
+          </div>
+          <p className="text-slate-600 dark:text-slate-300">Loading results...</p>
+        </div>
+      </div>
+    }>
+      <ResultsContent />
+    </Suspense>
   );
 }
